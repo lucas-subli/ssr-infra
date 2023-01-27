@@ -1,14 +1,19 @@
-# Welcome to your CDK TypeScript project
+# SvelteKit on AWS
 
-This is a blank project for CDK development with TypeScript.
+Testing SvelteKit deplyment using a Lambda@Edge function on a cloudfront distribution.
+Heavily based on https://juranki.github.io/sveltekit-cdk/
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+The idea is to create a sveltekit adapter to modify the sveltkit output to use a lambda@edge
+The prerendered and static files are uploaded to an S3 bucket
+And the code goes through the lambda@edge function
 
-## Useful commands
+The problem with this approach is that the svelketkit folder in this project needs to contain the output of the sveltekit build command with the custom adapter (there is a sample here).
+And the CDK will properly deploy it to the lambda@edge function and the S3 bucket accordingly.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+But that means that I can´t directly deploy from the sveltekit project and that is minorly annoying.
+
+The biggest advantages here are:
+
+1. No API gateway - less latency less costs
+1. lambda@edge is so much faster than usual lambda for end customers
+1. reasonably simple approach to understand

@@ -1,0 +1,9 @@
+{
+  "_app/*": "static",
+  "favicon.png": "static",
+  "robots.txt": "static",
+  "vite-manifest.json": "static",
+  "/about.html": "prerendered",
+  "/": "prerendered",
+  "/sverdle/*": "prerendered"
+}
